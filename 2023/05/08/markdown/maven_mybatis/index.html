@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>JDBC | 久违的Blog</title>
+  <title>Maven&amp;&amp;Mybatis | 久违的Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="JDBC知识">
+  <meta name="description" content="Maven基本使用&amp;&amp;Mybatis使用配置">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JDBC">
-<meta property="og:url" content="http://example.com/2023/05/08/5.8/index.html">
+<meta property="og:title" content="Maven&amp;&amp;Mybatis">
+<meta property="og:url" content="http://example.com/2023/05/08/markdown/maven_mybatis/index.html">
 <meta property="og:site_name" content="久违的Blog">
-<meta property="og:description" content="JDBC知识">
+<meta property="og:description" content="Maven基本使用&amp;&amp;Mybatis使用配置">
 <meta property="og:locale">
 <meta property="article:published_time" content="2023-05-08T14:11:36.000Z">
-<meta property="article:modified_time" content="2023-05-08T15:05:32.347Z">
+<meta property="article:modified_time" content="2023-05-10T11:05:47.175Z">
 <meta property="article:author" content="久违">
-<meta property="article:tag" content="JDBC">
+<meta property="article:tag" content="Maven&amp;&amp;Mybatis">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="久违的Blog" type="application/atom+xml">
@@ -71,7 +71,7 @@
 			</ul>
 		</nav>
 		<nav>
-			总文章数 5
+			总文章数 6
 		</nav>
 		<nav class="header-smart-menu">
     		
@@ -102,7 +102,18 @@
 					<a class="mail" target="_blank" href="/501858029@qq.com" title="mail"><i class="icon-mail"></i></a>
 		        
 				
-					<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1371780785&auto=1&height=66"></iframe>				
+					
+					
+					
+					
+					<div style="margin-right:10px;margin-left:0; padding:5px 0">
+						<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1371780785&auto=1&height=66"></iframe>						</div>
+					
+						
+						<p style="font-size: 12px;">愿以温柔撼动世界<p>
+					
+				
+		
 			</div>
 		</nav>
 		
@@ -183,244 +194,96 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-5.8" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-markdown/maven_mybatis" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      JDBC
+      Maven&amp;&amp;Mybatis
     </h1>
   
 
         
-        <a href="/2023/05/08/5.8/" class="archive-article-date">
+        <a href="/2023/05/08/markdown/maven_mybatis/" class="archive-article-date">
   	<time datetime="2023-05-08T14:11:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-05-08</time>
 </a>
 
         
         <div align="center" class="post-count">
-          字数：1k字 | 预计阅读时长：5分钟
+          字数：445字 | 预计阅读时长：2分钟
       </div>
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>JDBC知识</strong></p>
+        <p> Maven基本使用&amp;&amp;Mybatis使用配置</p>
 <span id="more"></span>
 
-<blockquote>
+<h4 id="Maven-常用命令"><a href="#Maven-常用命令" class="headerlink" title="Maven 常用命令"></a>Maven 常用命令</h4><blockquote>
 <ul>
-<li>JDBC的CRUD</li>
-<li>JDBC的主要API</li>
-<li>(Druid)德鲁伊数据库连接池</li>
+<li><p>compile ：编译</p>
+</li>
+<li><p>clean：清理</p>
+</li>
+<li><p>test：测试</p>
+</li>
+<li><p>package：打包</p>
+</li>
+<li><p>install：安装</p>
+</li>
 </ul>
 </blockquote>
-<h1 id="JDBC"><a href="#JDBC" class="headerlink" title="JDBC"></a>JDBC</h1><h2 id="JDBC的概念"><a href="#JDBC的概念" class="headerlink" title="JDBC的概念"></a>JDBC的概念</h2><p> 使用Java语言操作关系型数据库的一套API（接口），而接口的实现类就是数据库驱动jar包</p>
-<h2 id="Java操作数据库"><a href="#Java操作数据库" class="headerlink" title="Java操作数据库"></a>Java操作数据库</h2><p> 第一步：编写Java代码 </p>
-<pre><code>    //1.注册驱动
-    Class.forName(&quot;com.mysql.cj.jdbc.Driver&quot;);
+<h3 id="Mybatis入门及其开发配置"><a href="#Mybatis入门及其开发配置" class="headerlink" title="Mybatis入门及其开发配置"></a>Mybatis入门及其开发配置</h3><h4 id="https-mybatis-org-mybatis-3-zh-sqlmap-xml-html"><a href="#https-mybatis-org-mybatis-3-zh-sqlmap-xml-html" class="headerlink" title="https://mybatis.org/mybatis-3/zh/sqlmap-xml.html"></a><a target="_blank" rel="noopener" href="https://mybatis.org/mybatis-3/zh/sqlmap-xml.html">https://mybatis.org/mybatis-3/zh/sqlmap-xml.html</a></h4><h5 id="不采用Mapper代理开发"><a href="#不采用Mapper代理开发" class="headerlink" title="不采用Mapper代理开发"></a>不采用Mapper代理开发</h5><pre><code>    //1. 加载mybatis的核心配置文件，获取 SqlSessionFactory
+    String resource = &quot;mybatis-config.xml&quot;;
+    InputStream inputStream = Resources.getResourceAsStream(resource);
+    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 
-    //2.获取连接
-    String url = &quot;jdbc:mysql://127.0.0.1:3306/db04?useSSL=false&quot;;
-
-    String username = &quot;root&quot;;
-
-    String password = &quot;1234&quot;;
-
-    Connection connection = DriverManager.getConnection(url, username, password);
-
-    //3.创建sql语句
-    String sql = &quot;update account set money=200 where id=1&quot;;
-
-    //4.获取执行sql的对象statement
-    Statement stmt = connection.createStatement();
-
-    //5.执行sql语句
-    int count = stmt.executeUpdate(sql);//受影响的行数
-
-    //6.输出结果
-    System.out.println(count);
-
-    //7.释放资源
-    stmt.close();
-    connection.close();
+    //2. 获取SqlSession对象，用它来执行sql
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    //3. 执行sql
+    List&lt;User&gt; users = sqlSession.selectList(&quot;test.selectAll&quot;);
+    System.out.println(users);
+    //4. 释放资源
+    sqlSession.close();
 </code></pre>
-<p>第二步：Java代码将SQL发送到MySQL服务端</p>
-<p>第三步：MySQL服务端接收到SQL语句并执行该SQL语句</p>
-<p>第四步：将SQL语句执行的结果返回给Java代码</p>
-<h2 id="JDBC-API"><a href="#JDBC-API" class="headerlink" title="JDBC API"></a>JDBC API</h2><h4 id="DriverManager"><a href="#DriverManager" class="headerlink" title="DriverManager"></a>DriverManager</h4><p>DriverManager（驱动管理类）作用：</p>
-<ul>
-<li>注册驱动</li>
-<li>获取数据库连接</li>
-</ul>
-<h4 id="Connection"><a href="#Connection" class="headerlink" title="Connection"></a>Connection</h4><p>Connection（数据库连接对象）作用：</p>
-<ul>
-<li>获取执行 SQL 的对象</li>
-<li>管理事务</li>
-</ul>
-<p>开启事务 ： BEGIN; 或者 START TRANSACTION;<br>提交事务 ： COMMIT;<br>回滚事务 ： ROLLBACK;</p>
-<h4 id="Statement"><a href="#Statement" class="headerlink" title="Statement"></a>Statement</h4><p>Statement对象的作用就是用来执行SQL语句</p>
-<h4 id="ResultSet"><a href="#ResultSet" class="headerlink" title="ResultSet"></a>ResultSet</h4><p>ResultSet（结果集对象）</p>
-<h4 id="PreparedStatement"><a href="#PreparedStatement" class="headerlink" title="PreparedStatement"></a>PreparedStatement</h4><blockquote>
-<h4 id="PreparedStatement作用：-预编译SQL语句并执行：预防SQL注入问题"><a href="#PreparedStatement作用：-预编译SQL语句并执行：预防SQL注入问题" class="headerlink" title="PreparedStatement作用： 预编译SQL语句并执行：预防SQL注入问题"></a>PreparedStatement作用： 预编译SQL语句并执行：预防SQL注入问题</h4></blockquote>
-<pre><code>String sql = &quot;select * from tb_user where username=? and password= ?&quot;;
-System.out.println(sql);
-//创建sql执行对象
-PreparedStatement preparedStatement = connection.prepareStatement(sql);
-//配置参数
-preparedStatement.setString(1,name);
-preparedStatement.setString(2,pwd);
+<h5 id="采用Mapper代理开发"><a href="#采用Mapper代理开发" class="headerlink" title="采用Mapper代理开发"></a>采用Mapper代理开发</h5><pre><code>    //1. 加载mybatis的核心配置文件，获取 SqlSessionFactory
+    String resource = &quot;mybatis-config.xml&quot;;
+    InputStream inputStream = Resources.getResourceAsStream(resource);
+    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+
+    //2. 获取SqlSession对象，用它来执行sql
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    /*//3. 执行sql
+    List&lt;User&gt; users = sqlSession.selectList(&quot;test.selectAll&quot;);*/
+
+    UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+
+    List&lt;User&gt; users = mapper.selectAll();
+
+    System.out.println(users);
+    //4. 释放资源
+    sqlSession.close();
 </code></pre>
-<h2 id="数据库连接池-Druid"><a href="#数据库连接池-Druid" class="headerlink" title="数据库连接池 Druid"></a>数据库连接池 Druid</h2><blockquote>
-<h4 id="配置druid-properties"><a href="#配置druid-properties" class="headerlink" title="配置druid.properties"></a>配置druid.properties</h4></blockquote>
-<pre><code>driverClassName=com.mysql.cj.jdbc.Driver
-url=jdbc:mysql://127.0.0.1:3306/test?useSSL=false&amp;useServerPrepStmts=true
-username=root
-password=1234
-# 初始化连接数量
-initialSize=5
-# 最大连接数
-maxActive=10
-# 最大等待时间
-maxWait=3000
+<h5 id="使用Mapper代理方式，必须满足以下要求："><a href="#使用Mapper代理方式，必须满足以下要求：" class="headerlink" title="使用Mapper代理方式，必须满足以下要求："></a>使用Mapper代理方式，必须满足以下要求：</h5><p> 定义与SQL映射文件同名的Mapper接口，并且将Mapper接口和SQL映射文件放置在同一目录下。</p>
+<p> 设置SQL映射文件的namespace属性为Mapper接口全限定名</p>
+<pre><code>&lt;mapper namespace=&quot;com.kang.mapper.UserMapper&quot; &gt;
+&lt;select id=&quot;selectAll&quot; resultType=&quot;com.kang.pojo.User&quot;&gt;
+    select * from tb_user;
+&lt;/select&gt;
+&lt;/mapper&gt;
+
+
+public interface UserMapper &#123;
+List&lt;User&gt; selectAll();
 </code></pre>
+<p>}</p>
+<p> 在 Mapper 接口中定义方法，方法名就是SQL映射文件中sql语句的id，并保持参数类型和返回值类型一致</p>
+<h5 id="使用-mybatis-动态代理的方式可以自动生成dao接口实现类，不用自己实现dao接口类，简化编程"><a href="#使用-mybatis-动态代理的方式可以自动生成dao接口实现类，不用自己实现dao接口类，简化编程" class="headerlink" title="使用 mybatis 动态代理的方式可以自动生成dao接口实现类，不用自己实现dao接口类，简化编程"></a>使用 mybatis 动态代理的方式可以自动生成dao接口实现类，不用自己实现dao接口类，简化编程</h5><p>前提: </p>
 <blockquote>
-<h4 id="编写Java代码"><a href="#编写Java代码" class="headerlink" title="编写Java代码"></a>编写Java代码</h4></blockquote>
-<pre><code>//1.导入jar包
-//2.定义配置文件
-//3. 加载配置文件
-Properties prop = new Properties();
-prop.load(new FileInputStream(&quot;src/druid.properties&quot;));
-//4. 获取连接池对象
-DataSource dataSource = DruidDataSourceFactory.createDataSource(prop);
-//5. 获取数据库连接 Connection
-Connection connection = dataSource.getConnection();
-//System.out.println(System.getProperty(&quot;user.dir&quot;));
-</code></pre>
-<h2 id="JDBC的CRUD"><a href="#JDBC的CRUD" class="headerlink" title="JDBC的CRUD"></a>JDBC的CRUD</h2><h4 id="增加"><a href="#增加" class="headerlink" title="增加"></a>增加</h4><pre><code> // 接收页面提交的参数
-String brandName = &quot;香飘飘&quot;;
-String companyName = &quot;香飘飘&quot;;
-int ordered = 1;
-String description = &quot;绕地球一圈&quot;;
-int status = 1;
-
-//定义执行sql语句
-String sql = &quot;insert into tb_brand(brand_name, company_name, ordered, description, status) values(?,?,?,?,?);&quot;;
-
-//获取执行对象，并预编译
-PreparedStatement pstmt = conn.prepareStatement(sql);
-
-//配置参数
-
-//4. 设置参数
-pstmt.setString(1,brandName);
-pstmt.setString(2,companyName);
-pstmt.setInt(3,ordered);
-pstmt.setString(4,description);
-pstmt.setInt(5,status);
-
-//执行sql语句
-int i = pstmt.executeUpdate();
-
-//输出结果
-System.out.println(i&gt;0);
-</code></pre>
-<h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><pre><code>// 接收页面提交的参数
-    int id=4;
-
-//定义执行sql语句
- String sql = &quot;delete from tb_brand where id=?&quot;;
- 
-//获取执行对象，并预编译
-  PreparedStatement pstmt = conn.prepareStatement(sql);
-
-//配置参数
-
-//4. 设置参数
-  pstmt.setInt(1,id);
-
-//执行sql语句
-int i = pstmt.executeUpdate();
- 
-//输出结果
-  System.out.println(i&gt;0);
-  pstmt.close();
-  conn.close();
-</code></pre>
-<h4 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h4><pre><code>// 接收页面提交的参数
-String brandName = &quot;香飘飘&quot;;
-String companyName = &quot;香飘飘&quot;;
-int ordered = 1000;
-String description = &quot;绕地球三圈&quot;;
-int status = 1;
-int id=4;
-
-//定义执行sql语句
-String sql = &quot; update tb_brand\n&quot; +
-&quot; set brand_name  = ?,\n&quot; +
-&quot; company_name= ?,\n&quot; +
-&quot; ordered = ?,\n&quot; +
-&quot; description = ?,\n&quot; +
-&quot; status  = ?\n&quot; +
-&quot; where id = ?&quot;;
-//获取执行对象，并预编译
-PreparedStatement pstmt = conn.prepareStatement(sql);
-
-//配置参数
-
-//4. 设置参数
-pstmt.setString(1,brandName);
-pstmt.setString(2,companyName);
-pstmt.setInt(3,ordered);
-pstmt.setString(4,description);
-pstmt.setInt(5,status);
-pstmt.setInt(6,id);
-
-//执行sql语句
-int i = pstmt.executeUpdate();
-
-//输出结果
-System.out.println(i&gt;0);
-pstmt.close();
-conn.close();
-</code></pre>
-<h4 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h4><pre><code>    //定义执行sql语句
-    String sql = &quot;SELECT * FROM tb_brand;&quot;;
-    //获取执行对象，并预编译
-    PreparedStatement preparedStatement = conn.prepareStatement(sql);
-    //配置参数
-
-    //执行sql语句，获取结果集
-    ResultSet rs = preparedStatement.executeQuery();
-
-    //6. 处理结果 List&lt;Brand&gt; 封装Brand对象，装载List集合
-    ArrayList&lt;Brand&gt; arrayList = new ArrayList&lt;&gt;();
-    Brand brand;
-    while (rs.next()) &#123;//判断是否有数据，光标下移数据库
-        //获取数据
-        int id = rs.getInt(&quot;id&quot;);
-        String brandName = rs.getString(&quot;brand_name&quot;);
-        String companyName = rs.getString(&quot;company_name&quot;);
-        int ordered = rs.getInt(&quot;ordered&quot;);
-        String description = rs.getString(&quot;description&quot;);
-        int status = rs.getInt(&quot;status&quot;);
-
-        //封装Brand对象
-        brand = new Brand();
-        brand.setId(id);
-        brand.setBrandName(brandName);
-        brand.setCompanyName(companyName);
-        brand.setOrdered(ordered);
-        brand.setDescription(description);
-        brand.setStatus(status);
-
-        //装载集合
-        arrayList.add(brand);
-        preparedStatement.close();
-        conn.close();
-</code></pre>
+<p>(1)保证mapper.xml文件的namespace和dao接口的 类路径 一致<br>(2)mapper.xml文件中配置的id和dao接口定义的方法的名称一致</p>
+</blockquote>
 
       
 
@@ -465,7 +328,7 @@ conn.close();
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">JDBC</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Maven&&Mybatis</a>
         		</li>
       		
 		</ul>
@@ -521,7 +384,7 @@ conn.close();
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2023/05/08/5.8/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2023/05/08/markdown/maven_mybatis/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -533,220 +396,72 @@ conn.close();
     
       
         
-          <p><strong>JDBC知识</strong></p>
+          <p> Maven基本使用&amp;&amp;Mybatis使用配置</p>
 <span id="more"></span>
 
-<blockquote>
+<h4 id="Maven-常用命令"><a href="#Maven-常用命令" class="headerlink" title="Maven 常用命令"></a>Maven 常用命令</h4><blockquote>
 <ul>
-<li>JDBC的CRUD</li>
-<li>JDBC的主要API</li>
-<li>(Druid)德鲁伊数据库连接池</li>
+<li><p>compile ：编译</p>
+</li>
+<li><p>clean：清理</p>
+</li>
+<li><p>test：测试</p>
+</li>
+<li><p>package：打包</p>
+</li>
+<li><p>install：安装</p>
+</li>
 </ul>
 </blockquote>
-<h1 id="JDBC"><a href="#JDBC" class="headerlink" title="JDBC"></a>JDBC</h1><h2 id="JDBC的概念"><a href="#JDBC的概念" class="headerlink" title="JDBC的概念"></a>JDBC的概念</h2><p> 使用Java语言操作关系型数据库的一套API（接口），而接口的实现类就是数据库驱动jar包</p>
-<h2 id="Java操作数据库"><a href="#Java操作数据库" class="headerlink" title="Java操作数据库"></a>Java操作数据库</h2><p> 第一步：编写Java代码 </p>
-<pre><code>    //1.注册驱动
-    Class.forName(&quot;com.mysql.cj.jdbc.Driver&quot;);
+<h3 id="Mybatis入门及其开发配置"><a href="#Mybatis入门及其开发配置" class="headerlink" title="Mybatis入门及其开发配置"></a>Mybatis入门及其开发配置</h3><h4 id="https-mybatis-org-mybatis-3-zh-sqlmap-xml-html"><a href="#https-mybatis-org-mybatis-3-zh-sqlmap-xml-html" class="headerlink" title="https://mybatis.org/mybatis-3/zh/sqlmap-xml.html"></a><a target="_blank" rel="noopener" href="https://mybatis.org/mybatis-3/zh/sqlmap-xml.html">https://mybatis.org/mybatis-3/zh/sqlmap-xml.html</a></h4><h5 id="不采用Mapper代理开发"><a href="#不采用Mapper代理开发" class="headerlink" title="不采用Mapper代理开发"></a>不采用Mapper代理开发</h5><pre><code>    //1. 加载mybatis的核心配置文件，获取 SqlSessionFactory
+    String resource = &quot;mybatis-config.xml&quot;;
+    InputStream inputStream = Resources.getResourceAsStream(resource);
+    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 
-    //2.获取连接
-    String url = &quot;jdbc:mysql://127.0.0.1:3306/db04?useSSL=false&quot;;
-
-    String username = &quot;root&quot;;
-
-    String password = &quot;1234&quot;;
-
-    Connection connection = DriverManager.getConnection(url, username, password);
-
-    //3.创建sql语句
-    String sql = &quot;update account set money=200 where id=1&quot;;
-
-    //4.获取执行sql的对象statement
-    Statement stmt = connection.createStatement();
-
-    //5.执行sql语句
-    int count = stmt.executeUpdate(sql);//受影响的行数
-
-    //6.输出结果
-    System.out.println(count);
-
-    //7.释放资源
-    stmt.close();
-    connection.close();
+    //2. 获取SqlSession对象，用它来执行sql
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    //3. 执行sql
+    List&lt;User&gt; users = sqlSession.selectList(&quot;test.selectAll&quot;);
+    System.out.println(users);
+    //4. 释放资源
+    sqlSession.close();
 </code></pre>
-<p>第二步：Java代码将SQL发送到MySQL服务端</p>
-<p>第三步：MySQL服务端接收到SQL语句并执行该SQL语句</p>
-<p>第四步：将SQL语句执行的结果返回给Java代码</p>
-<h2 id="JDBC-API"><a href="#JDBC-API" class="headerlink" title="JDBC API"></a>JDBC API</h2><h4 id="DriverManager"><a href="#DriverManager" class="headerlink" title="DriverManager"></a>DriverManager</h4><p>DriverManager（驱动管理类）作用：</p>
-<ul>
-<li>注册驱动</li>
-<li>获取数据库连接</li>
-</ul>
-<h4 id="Connection"><a href="#Connection" class="headerlink" title="Connection"></a>Connection</h4><p>Connection（数据库连接对象）作用：</p>
-<ul>
-<li>获取执行 SQL 的对象</li>
-<li>管理事务</li>
-</ul>
-<p>开启事务 ： BEGIN; 或者 START TRANSACTION;<br>提交事务 ： COMMIT;<br>回滚事务 ： ROLLBACK;</p>
-<h4 id="Statement"><a href="#Statement" class="headerlink" title="Statement"></a>Statement</h4><p>Statement对象的作用就是用来执行SQL语句</p>
-<h4 id="ResultSet"><a href="#ResultSet" class="headerlink" title="ResultSet"></a>ResultSet</h4><p>ResultSet（结果集对象）</p>
-<h4 id="PreparedStatement"><a href="#PreparedStatement" class="headerlink" title="PreparedStatement"></a>PreparedStatement</h4><blockquote>
-<h4 id="PreparedStatement作用：-预编译SQL语句并执行：预防SQL注入问题"><a href="#PreparedStatement作用：-预编译SQL语句并执行：预防SQL注入问题" class="headerlink" title="PreparedStatement作用： 预编译SQL语句并执行：预防SQL注入问题"></a>PreparedStatement作用： 预编译SQL语句并执行：预防SQL注入问题</h4></blockquote>
-<pre><code>String sql = &quot;select * from tb_user where username=? and password= ?&quot;;
-System.out.println(sql);
-//创建sql执行对象
-PreparedStatement preparedStatement = connection.prepareStatement(sql);
-//配置参数
-preparedStatement.setString(1,name);
-preparedStatement.setString(2,pwd);
+<h5 id="采用Mapper代理开发"><a href="#采用Mapper代理开发" class="headerlink" title="采用Mapper代理开发"></a>采用Mapper代理开发</h5><pre><code>    //1. 加载mybatis的核心配置文件，获取 SqlSessionFactory
+    String resource = &quot;mybatis-config.xml&quot;;
+    InputStream inputStream = Resources.getResourceAsStream(resource);
+    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+
+    //2. 获取SqlSession对象，用它来执行sql
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    /*//3. 执行sql
+    List&lt;User&gt; users = sqlSession.selectList(&quot;test.selectAll&quot;);*/
+
+    UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+
+    List&lt;User&gt; users = mapper.selectAll();
+
+    System.out.println(users);
+    //4. 释放资源
+    sqlSession.close();
 </code></pre>
-<h2 id="数据库连接池-Druid"><a href="#数据库连接池-Druid" class="headerlink" title="数据库连接池 Druid"></a>数据库连接池 Druid</h2><blockquote>
-<h4 id="配置druid-properties"><a href="#配置druid-properties" class="headerlink" title="配置druid.properties"></a>配置druid.properties</h4></blockquote>
-<pre><code>driverClassName=com.mysql.cj.jdbc.Driver
-url=jdbc:mysql://127.0.0.1:3306/test?useSSL=false&amp;useServerPrepStmts=true
-username=root
-password=1234
-# 初始化连接数量
-initialSize=5
-# 最大连接数
-maxActive=10
-# 最大等待时间
-maxWait=3000
+<h5 id="使用Mapper代理方式，必须满足以下要求："><a href="#使用Mapper代理方式，必须满足以下要求：" class="headerlink" title="使用Mapper代理方式，必须满足以下要求："></a>使用Mapper代理方式，必须满足以下要求：</h5><p> 定义与SQL映射文件同名的Mapper接口，并且将Mapper接口和SQL映射文件放置在同一目录下。</p>
+<p> 设置SQL映射文件的namespace属性为Mapper接口全限定名</p>
+<pre><code>&lt;mapper namespace=&quot;com.kang.mapper.UserMapper&quot; &gt;
+&lt;select id=&quot;selectAll&quot; resultType=&quot;com.kang.pojo.User&quot;&gt;
+    select * from tb_user;
+&lt;/select&gt;
+&lt;/mapper&gt;
+
+
+public interface UserMapper &#123;
+List&lt;User&gt; selectAll();
 </code></pre>
+<p>}</p>
+<p> 在 Mapper 接口中定义方法，方法名就是SQL映射文件中sql语句的id，并保持参数类型和返回值类型一致</p>
+<h5 id="使用-mybatis-动态代理的方式可以自动生成dao接口实现类，不用自己实现dao接口类，简化编程"><a href="#使用-mybatis-动态代理的方式可以自动生成dao接口实现类，不用自己实现dao接口类，简化编程" class="headerlink" title="使用 mybatis 动态代理的方式可以自动生成dao接口实现类，不用自己实现dao接口类，简化编程"></a>使用 mybatis 动态代理的方式可以自动生成dao接口实现类，不用自己实现dao接口类，简化编程</h5><p>前提: </p>
 <blockquote>
-<h4 id="编写Java代码"><a href="#编写Java代码" class="headerlink" title="编写Java代码"></a>编写Java代码</h4></blockquote>
-<pre><code>//1.导入jar包
-//2.定义配置文件
-//3. 加载配置文件
-Properties prop = new Properties();
-prop.load(new FileInputStream(&quot;src/druid.properties&quot;));
-//4. 获取连接池对象
-DataSource dataSource = DruidDataSourceFactory.createDataSource(prop);
-//5. 获取数据库连接 Connection
-Connection connection = dataSource.getConnection();
-//System.out.println(System.getProperty(&quot;user.dir&quot;));
-</code></pre>
-<h2 id="JDBC的CRUD"><a href="#JDBC的CRUD" class="headerlink" title="JDBC的CRUD"></a>JDBC的CRUD</h2><h4 id="增加"><a href="#增加" class="headerlink" title="增加"></a>增加</h4><pre><code> // 接收页面提交的参数
-String brandName = &quot;香飘飘&quot;;
-String companyName = &quot;香飘飘&quot;;
-int ordered = 1;
-String description = &quot;绕地球一圈&quot;;
-int status = 1;
-
-//定义执行sql语句
-String sql = &quot;insert into tb_brand(brand_name, company_name, ordered, description, status) values(?,?,?,?,?);&quot;;
-
-//获取执行对象，并预编译
-PreparedStatement pstmt = conn.prepareStatement(sql);
-
-//配置参数
-
-//4. 设置参数
-pstmt.setString(1,brandName);
-pstmt.setString(2,companyName);
-pstmt.setInt(3,ordered);
-pstmt.setString(4,description);
-pstmt.setInt(5,status);
-
-//执行sql语句
-int i = pstmt.executeUpdate();
-
-//输出结果
-System.out.println(i&gt;0);
-</code></pre>
-<h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><pre><code>// 接收页面提交的参数
-    int id=4;
-
-//定义执行sql语句
- String sql = &quot;delete from tb_brand where id=?&quot;;
- 
-//获取执行对象，并预编译
-  PreparedStatement pstmt = conn.prepareStatement(sql);
-
-//配置参数
-
-//4. 设置参数
-  pstmt.setInt(1,id);
-
-//执行sql语句
-int i = pstmt.executeUpdate();
- 
-//输出结果
-  System.out.println(i&gt;0);
-  pstmt.close();
-  conn.close();
-</code></pre>
-<h4 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h4><pre><code>// 接收页面提交的参数
-String brandName = &quot;香飘飘&quot;;
-String companyName = &quot;香飘飘&quot;;
-int ordered = 1000;
-String description = &quot;绕地球三圈&quot;;
-int status = 1;
-int id=4;
-
-//定义执行sql语句
-String sql = &quot; update tb_brand\n&quot; +
-&quot; set brand_name  = ?,\n&quot; +
-&quot; company_name= ?,\n&quot; +
-&quot; ordered = ?,\n&quot; +
-&quot; description = ?,\n&quot; +
-&quot; status  = ?\n&quot; +
-&quot; where id = ?&quot;;
-//获取执行对象，并预编译
-PreparedStatement pstmt = conn.prepareStatement(sql);
-
-//配置参数
-
-//4. 设置参数
-pstmt.setString(1,brandName);
-pstmt.setString(2,companyName);
-pstmt.setInt(3,ordered);
-pstmt.setString(4,description);
-pstmt.setInt(5,status);
-pstmt.setInt(6,id);
-
-//执行sql语句
-int i = pstmt.executeUpdate();
-
-//输出结果
-System.out.println(i&gt;0);
-pstmt.close();
-conn.close();
-</code></pre>
-<h4 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h4><pre><code>    //定义执行sql语句
-    String sql = &quot;SELECT * FROM tb_brand;&quot;;
-    //获取执行对象，并预编译
-    PreparedStatement preparedStatement = conn.prepareStatement(sql);
-    //配置参数
-
-    //执行sql语句，获取结果集
-    ResultSet rs = preparedStatement.executeQuery();
-
-    //6. 处理结果 List&lt;Brand&gt; 封装Brand对象，装载List集合
-    ArrayList&lt;Brand&gt; arrayList = new ArrayList&lt;&gt;();
-    Brand brand;
-    while (rs.next()) &#123;//判断是否有数据，光标下移数据库
-        //获取数据
-        int id = rs.getInt(&quot;id&quot;);
-        String brandName = rs.getString(&quot;brand_name&quot;);
-        String companyName = rs.getString(&quot;company_name&quot;);
-        int ordered = rs.getInt(&quot;ordered&quot;);
-        String description = rs.getString(&quot;description&quot;);
-        int status = rs.getInt(&quot;status&quot;);
-
-        //封装Brand对象
-        brand = new Brand();
-        brand.setId(id);
-        brand.setBrandName(brandName);
-        brand.setCompanyName(companyName);
-        brand.setOrdered(ordered);
-        brand.setDescription(description);
-        brand.setStatus(status);
-
-        //装载集合
-        arrayList.add(brand);
-        preparedStatement.close();
-        conn.close();
-</code></pre>
+<p>(1)保证mapper.xml文件的namespace和dao接口的 类路径 一致<br>(2)mapper.xml文件中配置的id和dao接口定义的方法的名称一致</p>
+</blockquote>
 
         
       
@@ -759,8 +474,8 @@ conn.close();
 <nav id="article-nav">
   
   
-    <a href="/2023/05/08/maven_mybatis/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Maven&amp;&amp;Mybatis</div>
+    <a href="/2023/05/08/markdown/%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">动态代理</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -810,15 +525,7 @@ conn.close();
       	</div>
     </div>
   </div>
-  <span id="busuanzi_container_site_pv">    
-    
-    <span id="busuanzi_value_site_pv"></span>次</span> |
 
-<span id="busuanzi_container_site_uv">  
-
-    <span id="busuanzi_value_site_uv"></span>人次</span>
-    <!--页面点击小红心-->
-<script type="text/javascript" src="/love.js"></script>
 </footer>
 
 
@@ -917,6 +624,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Maven&&Mybatis</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">动态代理</a>
               </li>
             
             <div class="clearfix"></div>
