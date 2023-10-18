@@ -16,7 +16,7 @@
 <meta property="og:description" content="排序算法">
 <meta property="og:locale">
 <meta property="article:published_time" content="2023-03-31T13:32:47.000Z">
-<meta property="article:modified_time" content="2023-05-08T15:06:11.611Z">
+<meta property="article:modified_time" content="2023-10-18T09:20:47.817Z">
 <meta property="article:author" content="是小康呀.">
 <meta property="article:tag" content="Sort">
 <meta name="twitter:card" content="summary">
@@ -64,14 +64,12 @@
 	        
 				<li><a href="/categories">分类</a></li>
 	        
-				<li><a href="/grjl/ft5_94_profile/index.html">个人简历</a></li>
-	        
 				<li><a href="/archives/index.html">归档</a></li>
 	        
 			</ul>
 		</nav>
 		<nav>
-			总文章数 6
+			总文章数 9
 		</nav>
 		<nav class="header-smart-menu">
     		
@@ -147,8 +145,6 @@
 			
 				
 			
-				
-			
 			
 			
 			<nav class="header-nav">
@@ -171,15 +167,13 @@
 				<ul style="width: 70%">
 				
 				
-					<li style="width: 20%"><a href="/">主页</a></li>
+					<li style="width: 25%"><a href="/">主页</a></li>
 		        
-					<li style="width: 20%"><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
+					<li style="width: 25%"><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
 		        
-					<li style="width: 20%"><a href="/categories">分类</a></li>
+					<li style="width: 25%"><a href="/categories">分类</a></li>
 		        
-					<li style="width: 20%"><a href="/grjl/ft5_94_profile/index.html">个人简历</a></li>
-		        
-					<li style="width: 20%"><a href="/archives/index.html">归档</a></li>
+					<li style="width: 25%"><a href="/archives/index.html">归档</a></li>
 		        
 				</ul>
 			</nav>
@@ -217,6 +211,23 @@
       </header>
     
     <div class="article-entry" itemprop="articleBody">
+      
+          
+            <p>排序算法</p>
+<span id="more"></span>
+
+<p>1.选择排序</p>
+<p>时间复杂度O(n^2)，空间复杂度O(1)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[] x = &#123;<span class="number">15</span>, <span class="number">7</span>, <span class="number">12</span>, <span class="number">2</span>, <span class="number">8</span>&#125;;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> <span class="variable">z</span> <span class="operator">=</span> <span class="number">0</span>; z &lt; x.length - <span class="number">1</span>; z++) &#123;<span class="comment">//控制循环轮次</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> z;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> z + <span class="number">1</span>; i &lt; x.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (x[i] &lt; x[index]) &#123;</span><br><span class="line">            index = i;<span class="comment">//最小值的下标放在index</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (index != z) &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> x[z];</span><br><span class="line">        x[z] = x[index];</span><br><span class="line">        x[index] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> a : x) &#123;</span><br><span class="line">        System.out.print(a + <span class="string">&quot;\t&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2.冒泡排序</p>
+<p>时间复杂度O(n^2)，空间复杂度O(1)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[] x=&#123;<span class="number">15</span>,<span class="number">13</span>,<span class="number">9</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>&#125;;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; x.length; i++) &#123;<span class="comment">//循环轮次</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; x.length-<span class="number">1</span>-i; j++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(x[j]&gt;x[j+<span class="number">1</span>])&#123;</span><br><span class="line">            <span class="type">int</span> temp=x[j];</span><br><span class="line">            x[j]=x[j+<span class="number">1</span>];</span><br><span class="line">            x[j+<span class="number">1</span>]=temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> a:x</span><br><span class="line">         ) &#123;</span><br><span class="line">        System.out.println(a+<span class="string">&quot;\t&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+        
       
         <p>排序算法</p>
 <span id="more"></span>
@@ -280,6 +291,17 @@
 	</div>
 
       
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/排序//" class="article-tag-list-link color3">排序</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
 
       
 
@@ -337,37 +359,16 @@
       
       <div class="clearfix"></div>
     </div>
-
-    
-      
-        
-          <p>排序算法</p>
-<span id="more"></span>
-
-<p>1.选择排序</p>
-<p>时间复杂度O(n^2)，空间复杂度O(1)</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[] x = &#123;<span class="number">15</span>, <span class="number">7</span>, <span class="number">12</span>, <span class="number">2</span>, <span class="number">8</span>&#125;;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> <span class="variable">z</span> <span class="operator">=</span> <span class="number">0</span>; z &lt; x.length - <span class="number">1</span>; z++) &#123;<span class="comment">//控制循环轮次</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> z;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> z + <span class="number">1</span>; i &lt; x.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (x[i] &lt; x[index]) &#123;</span><br><span class="line">            index = i;<span class="comment">//最小值的下标放在index</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (index != z) &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> x[z];</span><br><span class="line">        x[z] = x[index];</span><br><span class="line">        x[index] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> a : x) &#123;</span><br><span class="line">        System.out.print(a + <span class="string">&quot;\t&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>2.冒泡排序</p>
-<p>时间复杂度O(n^2)，空间复杂度O(1)</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[] x=&#123;<span class="number">15</span>,<span class="number">13</span>,<span class="number">9</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>&#125;;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; x.length; i++) &#123;<span class="comment">//循环轮次</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; x.length-<span class="number">1</span>-i; j++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(x[j]&gt;x[j+<span class="number">1</span>])&#123;</span><br><span class="line">            <span class="type">int</span> temp=x[j];</span><br><span class="line">            x[j]=x[j+<span class="number">1</span>];</span><br><span class="line">            x[j+<span class="number">1</span>]=temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> a:x</span><br><span class="line">         ) &#123;</span><br><span class="line">        System.out.println(a+<span class="string">&quot;\t&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-        
-      
-      
-
-  </div>
 </article>
 
   
 <nav id="article-nav">
   
-    <a href="/2023/05/08/markdown/JDBC/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2023/05/08/markdown/%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          JDBC
+          JavaWeb登录页面的准备
         
       </div>
     </a>
@@ -402,7 +403,28 @@
   
   
   
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "http://example.com/2023/03/31/markdown/%E6%8E%92%E5%BA%8F/", 
+    sourceId: "markdown/排序",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+  
 
+  
+  <div id="SOHUCS" sid="markdown/排序" ></div> 
+<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+    window.changyan.api.config({
+        appid: "cywVXFwF6",
+        conf: "645329c2f48bfdae78da363938230888"
+    });
+</script>
+</script>
   
 
   
@@ -419,12 +441,14 @@
     	<div class="footer-left">
     		&copy; 2023 是小康呀.
     	</div>
+		<span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
       	</div>
     </div>
   </div>
 </footer>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
@@ -527,6 +551,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">动态代理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JavaWeb</a>
               </li>
             
             <div class="clearfix"></div>
@@ -683,5 +719,5 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
 
 </div>
   </div>
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":null,"use":"live2d-widget-model-miku","display":{"position":"right","width":150,"height":300,"hOffset":80,"vOffset":-50},"mobile":{"show":false},"log":false,"tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-haruto"},"display":{"position":"right","width":150,"height":300,"hOffset":80,"vOffset":-50},"mobile":{"show":false},"log":false,"tagMode":false});</script></body>
 </html>

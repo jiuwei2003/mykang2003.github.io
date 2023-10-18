@@ -16,7 +16,7 @@
 <meta property="og:description" content="Maven基本使用&amp;&amp;Mybatis使用配置">
 <meta property="og:locale">
 <meta property="article:published_time" content="2023-05-08T14:11:36.000Z">
-<meta property="article:modified_time" content="2023-05-11T15:01:35.388Z">
+<meta property="article:modified_time" content="2023-10-18T09:21:13.111Z">
 <meta property="article:author" content="是小康呀.">
 <meta property="article:tag" content="Maven&amp;&amp;Mybatis">
 <meta name="twitter:card" content="summary">
@@ -64,14 +64,12 @@
 	        
 				<li><a href="/categories">分类</a></li>
 	        
-				<li><a href="/grjl/ft5_94_profile/index.html">个人简历</a></li>
-	        
 				<li><a href="/archives/index.html">归档</a></li>
 	        
 			</ul>
 		</nav>
 		<nav>
-			总文章数 6
+			总文章数 9
 		</nav>
 		<nav class="header-smart-menu">
     		
@@ -147,8 +145,6 @@
 			
 				
 			
-				
-			
 			
 			
 			<nav class="header-nav">
@@ -171,15 +167,13 @@
 				<ul style="width: 70%">
 				
 				
-					<li style="width: 20%"><a href="/">主页</a></li>
+					<li style="width: 25%"><a href="/">主页</a></li>
 		        
-					<li style="width: 20%"><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
+					<li style="width: 25%"><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
 		        
-					<li style="width: 20%"><a href="/categories">分类</a></li>
+					<li style="width: 25%"><a href="/categories">分类</a></li>
 		        
-					<li style="width: 20%"><a href="/grjl/ft5_94_profile/index.html">个人简历</a></li>
-		        
-					<li style="width: 20%"><a href="/archives/index.html">归档</a></li>
+					<li style="width: 25%"><a href="/archives/index.html">归档</a></li>
 		        
 				</ul>
 			</nav>
@@ -217,6 +211,498 @@
       </header>
     
     <div class="article-entry" itemprop="articleBody">
+      
+          
+            <p> Maven基本使用&amp;&amp;Mybatis使用配置</p>
+<span id="more"></span>
+
+<h4 id="Maven-常用命令"><a href="#Maven-常用命令" class="headerlink" title="Maven 常用命令"></a>Maven 常用命令</h4><blockquote>
+<ul>
+<li><p>compile ：编译</p>
+</li>
+<li><p>clean：清理</p>
+</li>
+<li><p>test：测试</p>
+</li>
+<li><p>package：打包</p>
+</li>
+<li><p>install：安装</p>
+</li>
+</ul>
+</blockquote>
+<h3 id="Mybatis入门及其开发配置"><a href="#Mybatis入门及其开发配置" class="headerlink" title="Mybatis入门及其开发配置"></a>Mybatis入门及其开发配置</h3><h4 id="https-mybatis-org-mybatis-3-zh-sqlmap-xml-html"><a href="#https-mybatis-org-mybatis-3-zh-sqlmap-xml-html" class="headerlink" title="https://mybatis.org/mybatis-3/zh/sqlmap-xml.html"></a><a target="_blank" rel="noopener" href="https://mybatis.org/mybatis-3/zh/sqlmap-xml.html">https://mybatis.org/mybatis-3/zh/sqlmap-xml.html</a></h4><h5 id="不采用Mapper代理开发"><a href="#不采用Mapper代理开发" class="headerlink" title="不采用Mapper代理开发"></a>不采用Mapper代理开发</h5><pre><code>    //1. 加载mybatis的核心配置文件，获取 SqlSessionFactory
+    String resource = &quot;mybatis-config.xml&quot;;
+    InputStream inputStream = Resources.getResourceAsStream(resource);
+    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+
+    //2. 获取SqlSession对象，用它来执行sql
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    //3. 执行sql
+    List&lt;User&gt; users = sqlSession.selectList(&quot;test.selectAll&quot;);
+    System.out.println(users);
+    //4. 释放资源
+    sqlSession.close();
+</code></pre>
+<h5 id="采用Mapper代理开发"><a href="#采用Mapper代理开发" class="headerlink" title="采用Mapper代理开发"></a>采用Mapper代理开发</h5><pre><code>    //1. 加载mybatis的核心配置文件，获取 SqlSessionFactory
+    String resource = &quot;mybatis-config.xml&quot;;
+    InputStream inputStream = Resources.getResourceAsStream(resource);
+    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+
+    //2. 获取SqlSession对象，用它来执行sql
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    /*//3. 执行sql
+    List&lt;User&gt; users = sqlSession.selectList(&quot;test.selectAll&quot;);*/
+
+    UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+
+    List&lt;User&gt; users = mapper.selectAll();
+
+    System.out.println(users);
+    //4. 释放资源
+    sqlSession.close();
+</code></pre>
+<h5 id="使用Mapper代理方式，必须满足以下要求："><a href="#使用Mapper代理方式，必须满足以下要求：" class="headerlink" title="使用Mapper代理方式，必须满足以下要求："></a>使用Mapper代理方式，必须满足以下要求：</h5><p> 定义与SQL映射文件同名的Mapper接口，并且将Mapper接口和SQL映射文件放置在同一目录下。</p>
+<p> 设置SQL映射文件的namespace属性为Mapper接口全限定名</p>
+<pre><code>&lt;mapper namespace=&quot;com.kang.mapper.UserMapper&quot; &gt;
+&lt;select id=&quot;selectAll&quot; resultType=&quot;com.kang.pojo.User&quot;&gt;
+    select * from tb_user;
+&lt;/select&gt;
+&lt;/mapper&gt;
+
+
+public interface UserMapper &#123;
+List&lt;User&gt; selectAll();
+</code></pre>
+<p>}</p>
+<p> 在 Mapper 接口中定义方法，方法名就是SQL映射文件中sql语句的id，并保持参数类型和返回值类型一致</p>
+<h5 id="使用-mybatis-动态代理的方式可以自动生成dao接口实现类，不用自己实现dao接口类，简化编程"><a href="#使用-mybatis-动态代理的方式可以自动生成dao接口实现类，不用自己实现dao接口类，简化编程" class="headerlink" title="使用 mybatis 动态代理的方式可以自动生成dao接口实现类，不用自己实现dao接口类，简化编程"></a>使用 mybatis 动态代理的方式可以自动生成dao接口实现类，不用自己实现dao接口类，简化编程</h5><p>前提: </p>
+<blockquote>
+<p>(1)保证mapper.xml文件的namespace和dao接口的 类路径 一致<br>(2)mapper.xml文件中配置的id和dao接口定义的方法的名称一致</p>
+</blockquote>
+<h4 id="Mybatis-CRUD"><a href="#Mybatis-CRUD" class="headerlink" title="Mybatis CRUD"></a>Mybatis CRUD</h4><h5 id="首先获取sqlsession对象"><a href="#首先获取sqlsession对象" class="headerlink" title="首先获取sqlsession对象"></a>首先获取sqlsession对象</h5><pre><code>//获取sqlsession对象
+    //1. 加载mybatis的核心配置文件，获取 SqlSessionFactory
+    String resource = &quot;mybatis-config.xml&quot;;
+    InputStream inputStream = Resources.getResourceAsStream(resource);
+    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+    //获取 mapper接口的代理对象
+    SqlSession sqlSession = sqlSessionFactory.openSession(true);//自动提交事务，相当于关闭事务
+    BrandMapper mapper = sqlSession.getMapper(BrandMapper.class);
+</code></pre>
+<h5 id="mapper去执行相应的方法"><a href="#mapper去执行相应的方法" class="headerlink" title="mapper去执行相应的方法"></a>mapper去执行相应的方法</h5><pre><code>   mapper.add(brand);
+</code></pre>
+<h5 id="BrandMapper接口"><a href="#BrandMapper接口" class="headerlink" title="BrandMapper接口"></a>BrandMapper接口</h5><pre><code>public interface BrandMapper &#123;
+/**
+ * 查询所有
+ *
+ * @return
+ */
+List&lt;Brand&gt; selectAll();
+
+/**
+ * 根据id查询对象
+ *
+ * @param id
+ * @return
+ */
+Brand selectAllByIdBrand(int id);
+
+/**
+ * 动态查询
+ *
+ * @param map
+ * @return
+ */
+//List&lt;Brand&gt; selectCondition(@Param(&quot;status&quot;) int status, @Param(&quot;companyName&quot;)String companyName, @Param(&quot;brandName&quot;) String brandName);
+List&lt;Brand&gt; selectCondition(Map map);
+
+/**
+ * 单条件动态查询
+ *
+ * @param brand
+ * @return
+ */
+List&lt;Brand&gt; selectConditionSingle(Brand brand);
+
+/*
+添加
+ */
+void add(Brand brand);
+
+
+/*
+动态更新
+ */
+int updateBrand(Brand brand);
+
+
+/*
+根据id删除
+ */
+int deleteByIdInt(int id);
+
+/**
+ * 批量删除
+ *
+ * @param ids
+ * @return
+ */
+//int deleteByIds(@Param(&quot;ids&quot;) int[] ids);
+int deleteByIds(int[] ids);
+</code></pre>
+<h5 id="BrandMapper-xml"><a href="#BrandMapper-xml" class="headerlink" title="BrandMapper.xml"></a>BrandMapper.xml</h5><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;!DOCTYPE mapper
+    PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;
+    &quot;https://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;
+
+
+ &lt;mapper namespace=&quot;com.kang.mapper.BrandMapper&quot;&gt;
+
+&lt;resultMap id=&quot;brandResultMap&quot; type=&quot;com.kang.pojo.Brand&quot;&gt;
+    &lt;result column=&quot;brand_name&quot; property=&quot;brandName&quot;/&gt;
+    &lt;result column=&quot;company_name&quot; property=&quot;companyName&quot;/&gt;
+    &lt;!--        id主键名。result普通--&gt;
+&lt;/resultMap&gt;
+
+
+&lt;!--    resultMap--&gt;
+&lt;!--    定义resultMap标签--&gt;
+&lt;!--    在select语句中用resultMap代替resultType--&gt;
+
+&lt;!--    查询所有--&gt;
+&lt;select id=&quot;selectAll&quot; resultMap=&quot;brandResultMap&quot;&gt;
+    select * from tb_brand;
+&lt;/select&gt;
+
+&lt;!--    根据id查询品牌信息--&gt;
+&lt;!--    parameterType指定传入参数类型--&gt;
+&lt;!--&lt;select id=&quot;selectAllByIdBrand&quot; parameterType=&quot;int&quot; resultMap=&quot;brandResultMap&quot;&gt;
+    select * from tb_brand where id = #&#123;id&#125;
+
+&lt;/select&gt;--&gt;
+
+&lt;!--    特殊字符比如 &lt; 写转义字符&amp;lt;或者CDATA区--&gt;
+&lt;select id=&quot;selectAllByIdBrand&quot; parameterType=&quot;int&quot; resultMap=&quot;brandResultMap&quot;&gt;
+    select * from tb_brand where id
+    &lt;![CDATA[
+    &lt;
+    ]]&gt;
+    #&#123;id&#125;
+
+&lt;/select&gt;
+
+
+&lt;!--    条件查询--&gt;
+&lt;!--    &lt;select id=&quot;selectCondition&quot; resultMap=&quot;brandResultMap&quot;&gt;--&gt;
+&lt;!--        select * from tb_brand--&gt;
+&lt;!--        where status = #&#123;status&#125;--&gt;
+&lt;!--        and company_name like #&#123;companyName&#125;--&gt;
+&lt;!--        and brand_name like #&#123;brandName&#125;;--&gt;
+&lt;!--    &lt;/select&gt;--&gt;
+
+&lt;!--    动态条件查询--&gt;
+&lt;select id=&quot;selectCondition&quot; resultMap=&quot;brandResultMap&quot;&gt;
+    select * from tb_brand
+    &lt;where&gt;
+        &lt;if test=&quot;status !=null&quot;&gt;
+            status = #&#123;status&#125;
+        &lt;/if&gt;
+        &lt;if test=&quot;companyName !=null and companyName != &#39;&#39;&quot;&gt;
+            and company_name like #&#123;companyName&#125;
+        &lt;/if&gt;
+        &lt;if test=&quot;brandName !=null and brandName != &#39;&#39;&quot;&gt;
+            and brand_name like #&#123;brandName&#125;;
+        &lt;/if&gt;
+    &lt;/where&gt;
+&lt;/select&gt;
+&lt;select id=&quot;selectConditionSingle&quot; resultType=&quot;com.kang.pojo.Brand&quot;&gt;
+    select * from tb_brand
+    &lt;where&gt;
+        &lt;choose&gt;
+            &lt;when test=&quot;status !=null&quot;&gt;
+                status = #&#123;status&#125;
+            &lt;/when&gt;
+            &lt;when test=&quot;companyName !=null and companyName != &#39;&#39;&quot;&gt;
+                and company_name like #&#123;companyName&#125;
+            &lt;/when&gt;
+            &lt;when test=&quot;brandName !=null and brandName != &#39;&#39;&quot;&gt;
+                and company_name like #&#123;companyName&#125;
+            &lt;/when&gt;
+            &lt;!--&lt;otherwise&gt;
+                1=1
+            &lt;/otherwise&gt;--&gt;
+        &lt;/choose&gt;
+    &lt;/where&gt;
+&lt;/select&gt;
+
+&lt;!--返回添加数据的主键 useGeneratedKeys   keyProperty--&gt;
+&lt;insert id=&quot;add&quot; useGeneratedKeys=&quot;true&quot; keyProperty=&quot;id&quot;&gt;
+    insert into tb_brand(id,brand_name,company_name,ordered,description,status) value
+    (#&#123;id&#125;,#&#123;brandName&#125;,#&#123;companyName&#125;,#&#123;ordered&#125;,#&#123;description&#125;,#&#123;status&#125;);
+&lt;/insert&gt;
+
+&lt;update id=&quot;updateBrand&quot;&gt;
+    update tb_brand
+    &lt;set&gt;
+        &lt;if test=&quot;status !=null&quot;&gt;
+            status = #&#123;status&#125;,
+        &lt;/if&gt;
+        &lt;if test=&quot;companyName !=null and companyName != &#39;&#39;&quot;&gt;
+            company_name = #&#123;companyName&#125;,
+        &lt;/if&gt;
+        &lt;if test=&quot;brandName !=null and brandName != &#39;&#39;&quot;&gt;
+            brand_name = #&#123;brandName&#125;,
+        &lt;/if&gt;
+        &lt;if test=&quot;ordered!=null&quot;&gt;
+            ordered =#&#123;ordered&#125;,
+        &lt;/if&gt;
+        &lt;if test=&quot;description!=null and description != &#39;&#39;&quot;&gt;
+            description =#&#123;description&#125;
+        &lt;/if&gt;
+    &lt;/set&gt;
+    where id = #&#123;id&#125;
+&lt;/update&gt;
+
+
+&lt;delete id=&quot;deleteByIdInt&quot;&gt;
+    delete from tb_brand where id = #&#123;id&#125;;
+&lt;/delete&gt;
+&lt;!--    collection应为array名称,写ids需要前面加param--&gt;
+&lt;delete id=&quot;deleteByIds&quot;&gt;
+    delete from tb_brand where id in
+    &lt;foreach collection=&quot;array&quot; item=&quot;id&quot; open=&quot; (&quot; close=&quot;)&quot; separator=&quot;,&quot;&gt;
+        #&#123;id&#125;
+    &lt;/foreach&gt;
+    ;
+ &lt;/delete&gt;
+
+&lt;/mapper&gt;
+</code></pre>
+<h5 id="MybatisTest"><a href="#MybatisTest" class="headerlink" title="MybatisTest"></a>MybatisTest</h5><pre><code>public class MybatisTest &#123;
+@Test
+public void selectAll() throws IOException &#123;
+    //获取sqlsession对象
+    //1. 加载mybatis的核心配置文件，获取 SqlSessionFactory
+    String resource = &quot;mybatis-config.xml&quot;;
+    InputStream inputStream = Resources.getResourceAsStream(resource);
+    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+    //获取 mapper接口的代理对象
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    BrandMapper mapper = sqlSession.getMapper(BrandMapper.class);
+
+    List&lt;Brand&gt; brands = mapper.selectAll();
+    System.out.println(brands);
+    sqlSession.close();
+&#125;
+
+@Test
+public void selectAllById() throws IOException &#123;
+    int id = 1;
+    //获取sqlsession对象
+    //1. 加载mybatis的核心配置文件，获取 SqlSessionFactory
+    String resource = &quot;mybatis-config.xml&quot;;
+    InputStream inputStream = Resources.getResourceAsStream(resource);
+    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+    //获取 mapper接口的代理对象
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    BrandMapper mapper = sqlSession.getMapper(BrandMapper.class);
+
+    Brand brands = mapper.selectAllByIdBrand(id);
+    System.out.println(brands);
+    sqlSession.close();
+&#125;
+
+@Test
+public void selectCondition() throws IOException &#123;
+    int status = 1;
+    String companyName = &quot;华为&quot;;
+    String brandName = &quot;华为&quot;;
+
+   //处理参数
+    companyName = &quot;%&quot; + companyName + &quot;%&quot;;
+    brandName = &quot;%&quot; + brandName + &quot;%&quot;;
+
+    Map map = new HashMap&lt;&gt;();
+    map.put(&quot;status&quot;, status);
+    map.put(&quot;companyName&quot;, companyName);
+    map.put(&quot;brandName&quot;, brandName);
+
+    //获取sqlsession对象
+    //1. 加载mybatis的核心配置文件，获取 SqlSessionFactory
+    String resource = &quot;mybatis-config.xml&quot;;
+    InputStream inputStream = Resources.getResourceAsStream(resource);
+    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+    //获取 mapper接口的代理对象
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    BrandMapper mapper = sqlSession.getMapper(BrandMapper.class);
+
+    //List&lt;Brand&gt; brands = mapper.selectCondition(status,companyName,brandName);
+    List&lt;Brand&gt; brands = mapper.selectCondition(map);
+
+    System.out.println(brands);
+    sqlSession.close();
+&#125;
+
+
+@Test
+public void selectConditionSingle() throws IOException &#123;
+    int status = 1;
+    String companyName = &quot;华为&quot;;
+    String brandName = &quot;华为&quot;;
+
+   //处理参数
+    companyName = &quot;%&quot; + companyName + &quot;%&quot;;
+    brandName = &quot;%&quot; + brandName + &quot;%&quot;;
+
+    /*Map map = new HashMap&lt;&gt;();
+    map.put(&quot;status&quot;,status);
+    map.put(&quot;companyName&quot;,companyName);
+    map.put(&quot;brandName&quot;,brandName);*/
+    Brand brand = new Brand();
+    //brand.setStatus(status);
+    //  brand.setCompanyName(companyName);
+    //brand.setBrandName(brandName);
+
+
+    //获取sqlsession对象
+    //1. 加载mybatis的核心配置文件，获取 SqlSessionFactory
+    String resource = &quot;mybatis-config.xml&quot;;
+    InputStream inputStream = Resources.getResourceAsStream(resource);
+    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+    //获取 mapper接口的代理对象
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    BrandMapper mapper = sqlSession.getMapper(BrandMapper.class);
+
+    //List&lt;Brand&gt; brands = mapper.selectCondition(status,companyName,brandName);
+    List&lt;Brand&gt; brands = mapper.selectConditionSingle(brand);
+
+    System.out.println(brands);
+    sqlSession.close();
+&#125;
+
+
+@Test
+public void add() throws IOException &#123;
+    String companyName = &quot;不哦里哦&quot;;
+    String brandName = &quot;菠萝&quot;;
+    int ordered = 500;
+    String description = &quot;米家无敌&quot;;
+    int status = 1;
+
+    Brand brand = new Brand();
+    brand.setStatus(status);
+    brand.setCompanyName(companyName);
+    //brand.setId(id);
+    brand.setBrandName(brandName);
+    brand.setOrdered(ordered);
+    brand.setDescription(description);
+
+
+    //获取sqlsession对象
+    //1. 加载mybatis的核心配置文件，获取 SqlSessionFactory
+    String resource = &quot;mybatis-config.xml&quot;;
+    InputStream inputStream = Resources.getResourceAsStream(resource);
+    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+    //获取 mapper接口的代理对象
+    SqlSession sqlSession = sqlSessionFactory.openSession(true);//自动提交事务，相当于关闭事务
+    BrandMapper mapper = sqlSession.getMapper(BrandMapper.class);
+
+    mapper.add(brand);
+    //提交事务
+    // sqlSession.commit();
+
+    sqlSession.close();
+&#125;
+
+
+@Test
+public void updateBrand() throws IOException &#123;
+    String companyName = &quot;不哦里哦&quot;;
+    String brandName = &quot;菠萝&quot;;
+    int ordered = 500;
+    String description = &quot;菠萝手机&quot;;
+    int status = 1;
+    int id = 6;
+
+    Brand brand = new Brand();
+    brand.setStatus(status);
+    brand.setCompanyName(companyName);
+    brand.setBrandName(brandName);
+    brand.setOrdered(ordered);
+    brand.setDescription(description);
+    brand.setId(id);
+
+
+    //获取sqlsession对象
+    //1. 加载mybatis的核心配置文件，获取 SqlSessionFactory
+    String resource = &quot;mybatis-config.xml&quot;;
+    InputStream inputStream = Resources.getResourceAsStream(resource);
+    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+    //获取 mapper接口的代理对象
+    SqlSession sqlSession = sqlSessionFactory.openSession();//自动提交事务，相当于关闭事务
+    BrandMapper mapper = sqlSession.getMapper(BrandMapper.class);
+
+    int count = mapper.updateBrand(brand);
+    //提交事务
+    // sqlSession.commit();
+    System.out.println(count);
+    sqlSession.commit();
+    sqlSession.close();
+&#125;
+
+@Test
+public void deleteByIdInt() throws IOException &#123;
+    int id = 6;
+    //获取sqlsession对象
+    //1. 加载mybatis的核心配置文件，获取 SqlSessionFactory
+    String resource = &quot;mybatis-config.xml&quot;;
+    InputStream inputStream = Resources.getResourceAsStream(resource);
+    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+    //获取 mapper接口的代理对象
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    BrandMapper mapper = sqlSession.getMapper(BrandMapper.class);
+
+    int count = mapper.deleteByIdInt(id);
+    System.out.println(count);
+    sqlSession.commit();
+    sqlSession.close();
+&#125;
+
+@Test
+public void deleteByIds() throws IOException &#123;
+    int[] id = &#123;2, 3&#125;;
+    //获取sqlsession对象
+    //1. 加载mybatis的核心配置文件，获取 SqlSessionFactory
+    String resource = &quot;mybatis-config.xml&quot;;
+    InputStream inputStream = Resources.getResourceAsStream(resource);
+    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+    //获取 mapper接口的代理对象
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    BrandMapper mapper = sqlSession.getMapper(BrandMapper.class);
+
+    int count = mapper.deleteByIds(id);
+    System.out.println(count);
+    sqlSession.commit();
+    sqlSession.close();
+&#125;
+
+@Test
+public void test() throws FileNotFoundException &#123;
+    PrintStream printStream = new PrintStream(&quot;d:\\d1.txt&quot;);
+
+    System.setOut(printStream);
+    printStream.println(&quot;你好&quot;);
+    System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));//强制重定向到控制台
+    System.out.println(&quot;你好&quot;);
+
+ &#125;
+
+
+&#125;
+</code></pre>
+
+          
+        
+        
       
         <p> Maven基本使用&amp;&amp;Mybatis使用配置</p>
 <span id="more"></span>
@@ -812,506 +1298,19 @@ public void test() throws FileNotFoundException &#123;
       
       <div class="clearfix"></div>
     </div>
-
-    
-      
-        
-          <p> Maven基本使用&amp;&amp;Mybatis使用配置</p>
-<span id="more"></span>
-
-<h4 id="Maven-常用命令"><a href="#Maven-常用命令" class="headerlink" title="Maven 常用命令"></a>Maven 常用命令</h4><blockquote>
-<ul>
-<li><p>compile ：编译</p>
-</li>
-<li><p>clean：清理</p>
-</li>
-<li><p>test：测试</p>
-</li>
-<li><p>package：打包</p>
-</li>
-<li><p>install：安装</p>
-</li>
-</ul>
-</blockquote>
-<h3 id="Mybatis入门及其开发配置"><a href="#Mybatis入门及其开发配置" class="headerlink" title="Mybatis入门及其开发配置"></a>Mybatis入门及其开发配置</h3><h4 id="https-mybatis-org-mybatis-3-zh-sqlmap-xml-html"><a href="#https-mybatis-org-mybatis-3-zh-sqlmap-xml-html" class="headerlink" title="https://mybatis.org/mybatis-3/zh/sqlmap-xml.html"></a><a target="_blank" rel="noopener" href="https://mybatis.org/mybatis-3/zh/sqlmap-xml.html">https://mybatis.org/mybatis-3/zh/sqlmap-xml.html</a></h4><h5 id="不采用Mapper代理开发"><a href="#不采用Mapper代理开发" class="headerlink" title="不采用Mapper代理开发"></a>不采用Mapper代理开发</h5><pre><code>    //1. 加载mybatis的核心配置文件，获取 SqlSessionFactory
-    String resource = &quot;mybatis-config.xml&quot;;
-    InputStream inputStream = Resources.getResourceAsStream(resource);
-    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-
-    //2. 获取SqlSession对象，用它来执行sql
-    SqlSession sqlSession = sqlSessionFactory.openSession();
-    //3. 执行sql
-    List&lt;User&gt; users = sqlSession.selectList(&quot;test.selectAll&quot;);
-    System.out.println(users);
-    //4. 释放资源
-    sqlSession.close();
-</code></pre>
-<h5 id="采用Mapper代理开发"><a href="#采用Mapper代理开发" class="headerlink" title="采用Mapper代理开发"></a>采用Mapper代理开发</h5><pre><code>    //1. 加载mybatis的核心配置文件，获取 SqlSessionFactory
-    String resource = &quot;mybatis-config.xml&quot;;
-    InputStream inputStream = Resources.getResourceAsStream(resource);
-    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-
-    //2. 获取SqlSession对象，用它来执行sql
-    SqlSession sqlSession = sqlSessionFactory.openSession();
-    /*//3. 执行sql
-    List&lt;User&gt; users = sqlSession.selectList(&quot;test.selectAll&quot;);*/
-
-    UserMapper mapper = sqlSession.getMapper(UserMapper.class);
-
-    List&lt;User&gt; users = mapper.selectAll();
-
-    System.out.println(users);
-    //4. 释放资源
-    sqlSession.close();
-</code></pre>
-<h5 id="使用Mapper代理方式，必须满足以下要求："><a href="#使用Mapper代理方式，必须满足以下要求：" class="headerlink" title="使用Mapper代理方式，必须满足以下要求："></a>使用Mapper代理方式，必须满足以下要求：</h5><p> 定义与SQL映射文件同名的Mapper接口，并且将Mapper接口和SQL映射文件放置在同一目录下。</p>
-<p> 设置SQL映射文件的namespace属性为Mapper接口全限定名</p>
-<pre><code>&lt;mapper namespace=&quot;com.kang.mapper.UserMapper&quot; &gt;
-&lt;select id=&quot;selectAll&quot; resultType=&quot;com.kang.pojo.User&quot;&gt;
-    select * from tb_user;
-&lt;/select&gt;
-&lt;/mapper&gt;
-
-
-public interface UserMapper &#123;
-List&lt;User&gt; selectAll();
-</code></pre>
-<p>}</p>
-<p> 在 Mapper 接口中定义方法，方法名就是SQL映射文件中sql语句的id，并保持参数类型和返回值类型一致</p>
-<h5 id="使用-mybatis-动态代理的方式可以自动生成dao接口实现类，不用自己实现dao接口类，简化编程"><a href="#使用-mybatis-动态代理的方式可以自动生成dao接口实现类，不用自己实现dao接口类，简化编程" class="headerlink" title="使用 mybatis 动态代理的方式可以自动生成dao接口实现类，不用自己实现dao接口类，简化编程"></a>使用 mybatis 动态代理的方式可以自动生成dao接口实现类，不用自己实现dao接口类，简化编程</h5><p>前提: </p>
-<blockquote>
-<p>(1)保证mapper.xml文件的namespace和dao接口的 类路径 一致<br>(2)mapper.xml文件中配置的id和dao接口定义的方法的名称一致</p>
-</blockquote>
-<h4 id="Mybatis-CRUD"><a href="#Mybatis-CRUD" class="headerlink" title="Mybatis CRUD"></a>Mybatis CRUD</h4><h5 id="首先获取sqlsession对象"><a href="#首先获取sqlsession对象" class="headerlink" title="首先获取sqlsession对象"></a>首先获取sqlsession对象</h5><pre><code>//获取sqlsession对象
-    //1. 加载mybatis的核心配置文件，获取 SqlSessionFactory
-    String resource = &quot;mybatis-config.xml&quot;;
-    InputStream inputStream = Resources.getResourceAsStream(resource);
-    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-    //获取 mapper接口的代理对象
-    SqlSession sqlSession = sqlSessionFactory.openSession(true);//自动提交事务，相当于关闭事务
-    BrandMapper mapper = sqlSession.getMapper(BrandMapper.class);
-</code></pre>
-<h5 id="mapper去执行相应的方法"><a href="#mapper去执行相应的方法" class="headerlink" title="mapper去执行相应的方法"></a>mapper去执行相应的方法</h5><pre><code>   mapper.add(brand);
-</code></pre>
-<h5 id="BrandMapper接口"><a href="#BrandMapper接口" class="headerlink" title="BrandMapper接口"></a>BrandMapper接口</h5><pre><code>public interface BrandMapper &#123;
-/**
- * 查询所有
- *
- * @return
- */
-List&lt;Brand&gt; selectAll();
-
-/**
- * 根据id查询对象
- *
- * @param id
- * @return
- */
-Brand selectAllByIdBrand(int id);
-
-/**
- * 动态查询
- *
- * @param map
- * @return
- */
-//List&lt;Brand&gt; selectCondition(@Param(&quot;status&quot;) int status, @Param(&quot;companyName&quot;)String companyName, @Param(&quot;brandName&quot;) String brandName);
-List&lt;Brand&gt; selectCondition(Map map);
-
-/**
- * 单条件动态查询
- *
- * @param brand
- * @return
- */
-List&lt;Brand&gt; selectConditionSingle(Brand brand);
-
-/*
-添加
- */
-void add(Brand brand);
-
-
-/*
-动态更新
- */
-int updateBrand(Brand brand);
-
-
-/*
-根据id删除
- */
-int deleteByIdInt(int id);
-
-/**
- * 批量删除
- *
- * @param ids
- * @return
- */
-//int deleteByIds(@Param(&quot;ids&quot;) int[] ids);
-int deleteByIds(int[] ids);
-</code></pre>
-<h5 id="BrandMapper-xml"><a href="#BrandMapper-xml" class="headerlink" title="BrandMapper.xml"></a>BrandMapper.xml</h5><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
-&lt;!DOCTYPE mapper
-    PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;
-    &quot;https://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;
-
-
- &lt;mapper namespace=&quot;com.kang.mapper.BrandMapper&quot;&gt;
-
-&lt;resultMap id=&quot;brandResultMap&quot; type=&quot;com.kang.pojo.Brand&quot;&gt;
-    &lt;result column=&quot;brand_name&quot; property=&quot;brandName&quot;/&gt;
-    &lt;result column=&quot;company_name&quot; property=&quot;companyName&quot;/&gt;
-    &lt;!--        id主键名。result普通--&gt;
-&lt;/resultMap&gt;
-
-
-&lt;!--    resultMap--&gt;
-&lt;!--    定义resultMap标签--&gt;
-&lt;!--    在select语句中用resultMap代替resultType--&gt;
-
-&lt;!--    查询所有--&gt;
-&lt;select id=&quot;selectAll&quot; resultMap=&quot;brandResultMap&quot;&gt;
-    select * from tb_brand;
-&lt;/select&gt;
-
-&lt;!--    根据id查询品牌信息--&gt;
-&lt;!--    parameterType指定传入参数类型--&gt;
-&lt;!--&lt;select id=&quot;selectAllByIdBrand&quot; parameterType=&quot;int&quot; resultMap=&quot;brandResultMap&quot;&gt;
-    select * from tb_brand where id = #&#123;id&#125;
-
-&lt;/select&gt;--&gt;
-
-&lt;!--    特殊字符比如 &lt; 写转义字符&amp;lt;或者CDATA区--&gt;
-&lt;select id=&quot;selectAllByIdBrand&quot; parameterType=&quot;int&quot; resultMap=&quot;brandResultMap&quot;&gt;
-    select * from tb_brand where id
-    &lt;![CDATA[
-    &lt;
-    ]]&gt;
-    #&#123;id&#125;
-
-&lt;/select&gt;
-
-
-&lt;!--    条件查询--&gt;
-&lt;!--    &lt;select id=&quot;selectCondition&quot; resultMap=&quot;brandResultMap&quot;&gt;--&gt;
-&lt;!--        select * from tb_brand--&gt;
-&lt;!--        where status = #&#123;status&#125;--&gt;
-&lt;!--        and company_name like #&#123;companyName&#125;--&gt;
-&lt;!--        and brand_name like #&#123;brandName&#125;;--&gt;
-&lt;!--    &lt;/select&gt;--&gt;
-
-&lt;!--    动态条件查询--&gt;
-&lt;select id=&quot;selectCondition&quot; resultMap=&quot;brandResultMap&quot;&gt;
-    select * from tb_brand
-    &lt;where&gt;
-        &lt;if test=&quot;status !=null&quot;&gt;
-            status = #&#123;status&#125;
-        &lt;/if&gt;
-        &lt;if test=&quot;companyName !=null and companyName != &#39;&#39;&quot;&gt;
-            and company_name like #&#123;companyName&#125;
-        &lt;/if&gt;
-        &lt;if test=&quot;brandName !=null and brandName != &#39;&#39;&quot;&gt;
-            and brand_name like #&#123;brandName&#125;;
-        &lt;/if&gt;
-    &lt;/where&gt;
-&lt;/select&gt;
-&lt;select id=&quot;selectConditionSingle&quot; resultType=&quot;com.kang.pojo.Brand&quot;&gt;
-    select * from tb_brand
-    &lt;where&gt;
-        &lt;choose&gt;
-            &lt;when test=&quot;status !=null&quot;&gt;
-                status = #&#123;status&#125;
-            &lt;/when&gt;
-            &lt;when test=&quot;companyName !=null and companyName != &#39;&#39;&quot;&gt;
-                and company_name like #&#123;companyName&#125;
-            &lt;/when&gt;
-            &lt;when test=&quot;brandName !=null and brandName != &#39;&#39;&quot;&gt;
-                and company_name like #&#123;companyName&#125;
-            &lt;/when&gt;
-            &lt;!--&lt;otherwise&gt;
-                1=1
-            &lt;/otherwise&gt;--&gt;
-        &lt;/choose&gt;
-    &lt;/where&gt;
-&lt;/select&gt;
-
-&lt;!--返回添加数据的主键 useGeneratedKeys   keyProperty--&gt;
-&lt;insert id=&quot;add&quot; useGeneratedKeys=&quot;true&quot; keyProperty=&quot;id&quot;&gt;
-    insert into tb_brand(id,brand_name,company_name,ordered,description,status) value
-    (#&#123;id&#125;,#&#123;brandName&#125;,#&#123;companyName&#125;,#&#123;ordered&#125;,#&#123;description&#125;,#&#123;status&#125;);
-&lt;/insert&gt;
-
-&lt;update id=&quot;updateBrand&quot;&gt;
-    update tb_brand
-    &lt;set&gt;
-        &lt;if test=&quot;status !=null&quot;&gt;
-            status = #&#123;status&#125;,
-        &lt;/if&gt;
-        &lt;if test=&quot;companyName !=null and companyName != &#39;&#39;&quot;&gt;
-            company_name = #&#123;companyName&#125;,
-        &lt;/if&gt;
-        &lt;if test=&quot;brandName !=null and brandName != &#39;&#39;&quot;&gt;
-            brand_name = #&#123;brandName&#125;,
-        &lt;/if&gt;
-        &lt;if test=&quot;ordered!=null&quot;&gt;
-            ordered =#&#123;ordered&#125;,
-        &lt;/if&gt;
-        &lt;if test=&quot;description!=null and description != &#39;&#39;&quot;&gt;
-            description =#&#123;description&#125;
-        &lt;/if&gt;
-    &lt;/set&gt;
-    where id = #&#123;id&#125;
-&lt;/update&gt;
-
-
-&lt;delete id=&quot;deleteByIdInt&quot;&gt;
-    delete from tb_brand where id = #&#123;id&#125;;
-&lt;/delete&gt;
-&lt;!--    collection应为array名称,写ids需要前面加param--&gt;
-&lt;delete id=&quot;deleteByIds&quot;&gt;
-    delete from tb_brand where id in
-    &lt;foreach collection=&quot;array&quot; item=&quot;id&quot; open=&quot; (&quot; close=&quot;)&quot; separator=&quot;,&quot;&gt;
-        #&#123;id&#125;
-    &lt;/foreach&gt;
-    ;
- &lt;/delete&gt;
-
-&lt;/mapper&gt;
-</code></pre>
-<h5 id="MybatisTest"><a href="#MybatisTest" class="headerlink" title="MybatisTest"></a>MybatisTest</h5><pre><code>public class MybatisTest &#123;
-@Test
-public void selectAll() throws IOException &#123;
-    //获取sqlsession对象
-    //1. 加载mybatis的核心配置文件，获取 SqlSessionFactory
-    String resource = &quot;mybatis-config.xml&quot;;
-    InputStream inputStream = Resources.getResourceAsStream(resource);
-    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-    //获取 mapper接口的代理对象
-    SqlSession sqlSession = sqlSessionFactory.openSession();
-    BrandMapper mapper = sqlSession.getMapper(BrandMapper.class);
-
-    List&lt;Brand&gt; brands = mapper.selectAll();
-    System.out.println(brands);
-    sqlSession.close();
-&#125;
-
-@Test
-public void selectAllById() throws IOException &#123;
-    int id = 1;
-    //获取sqlsession对象
-    //1. 加载mybatis的核心配置文件，获取 SqlSessionFactory
-    String resource = &quot;mybatis-config.xml&quot;;
-    InputStream inputStream = Resources.getResourceAsStream(resource);
-    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-    //获取 mapper接口的代理对象
-    SqlSession sqlSession = sqlSessionFactory.openSession();
-    BrandMapper mapper = sqlSession.getMapper(BrandMapper.class);
-
-    Brand brands = mapper.selectAllByIdBrand(id);
-    System.out.println(brands);
-    sqlSession.close();
-&#125;
-
-@Test
-public void selectCondition() throws IOException &#123;
-    int status = 1;
-    String companyName = &quot;华为&quot;;
-    String brandName = &quot;华为&quot;;
-
-   //处理参数
-    companyName = &quot;%&quot; + companyName + &quot;%&quot;;
-    brandName = &quot;%&quot; + brandName + &quot;%&quot;;
-
-    Map map = new HashMap&lt;&gt;();
-    map.put(&quot;status&quot;, status);
-    map.put(&quot;companyName&quot;, companyName);
-    map.put(&quot;brandName&quot;, brandName);
-
-    //获取sqlsession对象
-    //1. 加载mybatis的核心配置文件，获取 SqlSessionFactory
-    String resource = &quot;mybatis-config.xml&quot;;
-    InputStream inputStream = Resources.getResourceAsStream(resource);
-    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-    //获取 mapper接口的代理对象
-    SqlSession sqlSession = sqlSessionFactory.openSession();
-    BrandMapper mapper = sqlSession.getMapper(BrandMapper.class);
-
-    //List&lt;Brand&gt; brands = mapper.selectCondition(status,companyName,brandName);
-    List&lt;Brand&gt; brands = mapper.selectCondition(map);
-
-    System.out.println(brands);
-    sqlSession.close();
-&#125;
-
-
-@Test
-public void selectConditionSingle() throws IOException &#123;
-    int status = 1;
-    String companyName = &quot;华为&quot;;
-    String brandName = &quot;华为&quot;;
-
-   //处理参数
-    companyName = &quot;%&quot; + companyName + &quot;%&quot;;
-    brandName = &quot;%&quot; + brandName + &quot;%&quot;;
-
-    /*Map map = new HashMap&lt;&gt;();
-    map.put(&quot;status&quot;,status);
-    map.put(&quot;companyName&quot;,companyName);
-    map.put(&quot;brandName&quot;,brandName);*/
-    Brand brand = new Brand();
-    //brand.setStatus(status);
-    //  brand.setCompanyName(companyName);
-    //brand.setBrandName(brandName);
-
-
-    //获取sqlsession对象
-    //1. 加载mybatis的核心配置文件，获取 SqlSessionFactory
-    String resource = &quot;mybatis-config.xml&quot;;
-    InputStream inputStream = Resources.getResourceAsStream(resource);
-    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-    //获取 mapper接口的代理对象
-    SqlSession sqlSession = sqlSessionFactory.openSession();
-    BrandMapper mapper = sqlSession.getMapper(BrandMapper.class);
-
-    //List&lt;Brand&gt; brands = mapper.selectCondition(status,companyName,brandName);
-    List&lt;Brand&gt; brands = mapper.selectConditionSingle(brand);
-
-    System.out.println(brands);
-    sqlSession.close();
-&#125;
-
-
-@Test
-public void add() throws IOException &#123;
-    String companyName = &quot;不哦里哦&quot;;
-    String brandName = &quot;菠萝&quot;;
-    int ordered = 500;
-    String description = &quot;米家无敌&quot;;
-    int status = 1;
-
-    Brand brand = new Brand();
-    brand.setStatus(status);
-    brand.setCompanyName(companyName);
-    //brand.setId(id);
-    brand.setBrandName(brandName);
-    brand.setOrdered(ordered);
-    brand.setDescription(description);
-
-
-    //获取sqlsession对象
-    //1. 加载mybatis的核心配置文件，获取 SqlSessionFactory
-    String resource = &quot;mybatis-config.xml&quot;;
-    InputStream inputStream = Resources.getResourceAsStream(resource);
-    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-    //获取 mapper接口的代理对象
-    SqlSession sqlSession = sqlSessionFactory.openSession(true);//自动提交事务，相当于关闭事务
-    BrandMapper mapper = sqlSession.getMapper(BrandMapper.class);
-
-    mapper.add(brand);
-    //提交事务
-    // sqlSession.commit();
-
-    sqlSession.close();
-&#125;
-
-
-@Test
-public void updateBrand() throws IOException &#123;
-    String companyName = &quot;不哦里哦&quot;;
-    String brandName = &quot;菠萝&quot;;
-    int ordered = 500;
-    String description = &quot;菠萝手机&quot;;
-    int status = 1;
-    int id = 6;
-
-    Brand brand = new Brand();
-    brand.setStatus(status);
-    brand.setCompanyName(companyName);
-    brand.setBrandName(brandName);
-    brand.setOrdered(ordered);
-    brand.setDescription(description);
-    brand.setId(id);
-
-
-    //获取sqlsession对象
-    //1. 加载mybatis的核心配置文件，获取 SqlSessionFactory
-    String resource = &quot;mybatis-config.xml&quot;;
-    InputStream inputStream = Resources.getResourceAsStream(resource);
-    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-    //获取 mapper接口的代理对象
-    SqlSession sqlSession = sqlSessionFactory.openSession();//自动提交事务，相当于关闭事务
-    BrandMapper mapper = sqlSession.getMapper(BrandMapper.class);
-
-    int count = mapper.updateBrand(brand);
-    //提交事务
-    // sqlSession.commit();
-    System.out.println(count);
-    sqlSession.commit();
-    sqlSession.close();
-&#125;
-
-@Test
-public void deleteByIdInt() throws IOException &#123;
-    int id = 6;
-    //获取sqlsession对象
-    //1. 加载mybatis的核心配置文件，获取 SqlSessionFactory
-    String resource = &quot;mybatis-config.xml&quot;;
-    InputStream inputStream = Resources.getResourceAsStream(resource);
-    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-    //获取 mapper接口的代理对象
-    SqlSession sqlSession = sqlSessionFactory.openSession();
-    BrandMapper mapper = sqlSession.getMapper(BrandMapper.class);
-
-    int count = mapper.deleteByIdInt(id);
-    System.out.println(count);
-    sqlSession.commit();
-    sqlSession.close();
-&#125;
-
-@Test
-public void deleteByIds() throws IOException &#123;
-    int[] id = &#123;2, 3&#125;;
-    //获取sqlsession对象
-    //1. 加载mybatis的核心配置文件，获取 SqlSessionFactory
-    String resource = &quot;mybatis-config.xml&quot;;
-    InputStream inputStream = Resources.getResourceAsStream(resource);
-    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-    //获取 mapper接口的代理对象
-    SqlSession sqlSession = sqlSessionFactory.openSession();
-    BrandMapper mapper = sqlSession.getMapper(BrandMapper.class);
-
-    int count = mapper.deleteByIds(id);
-    System.out.println(count);
-    sqlSession.commit();
-    sqlSession.close();
-&#125;
-
-@Test
-public void test() throws FileNotFoundException &#123;
-    PrintStream printStream = new PrintStream(&quot;d:\\d1.txt&quot;);
-
-    System.setOut(printStream);
-    printStream.println(&quot;你好&quot;);
-    System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));//强制重定向到控制台
-    System.out.println(&quot;你好&quot;);
-
- &#125;
-
-
-&#125;
-</code></pre>
-
-        
-      
-      
-
-  </div>
 </article>
 
   
 <nav id="article-nav">
+  
+    <a href="/2023/10/18/markdown/Git/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Git
+        
+      </div>
+    </a>
   
   
     <a href="/2023/05/08/markdown/%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/" id="article-nav-older" class="article-nav-link-wrap">
@@ -1343,7 +1342,28 @@ public void test() throws FileNotFoundException &#123;
   
   
   
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "http://example.com/2023/05/08/markdown/maven_mybatis/", 
+    sourceId: "markdown/maven_mybatis",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+  
 
+  
+  <div id="SOHUCS" sid="markdown/maven_mybatis" ></div> 
+<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+    window.changyan.api.config({
+        appid: "cywVXFwF6",
+        conf: "645329c2f48bfdae78da363938230888"
+    });
+</script>
+</script>
   
 
   
@@ -1360,12 +1380,14 @@ public void test() throws FileNotFoundException &#123;
     	<div class="footer-left">
     		&copy; 2023 是小康呀.
     	</div>
+		<span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
       	</div>
     </div>
   </div>
 </footer>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
@@ -1468,6 +1490,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">动态代理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">ajax</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">JavaWeb</a>
               </li>
             
             <div class="clearfix"></div>
@@ -1624,5 +1658,5 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
 
 </div>
   </div>
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":null,"use":"live2d-widget-model-miku","display":{"position":"right","width":150,"height":300,"hOffset":80,"vOffset":-50},"mobile":{"show":false},"log":false,"tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-haruto"},"display":{"position":"right","width":150,"height":300,"hOffset":80,"vOffset":-50},"mobile":{"show":false},"log":false,"tagMode":false});</script></body>
 </html>
