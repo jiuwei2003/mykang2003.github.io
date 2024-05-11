@@ -302,7 +302,7 @@
 <meta property="og:image" content="c:/Users/康/AppData/Roaming/Typora/typora-user-images/image-20231203224324776.png">
 <meta property="og:image" content="c:/Users/康/AppData/Roaming/Typora/typora-user-images/image-20231203224654161.png">
 <meta property="article:published_time" content="2023-05-08T14:11:36.000Z">
-<meta property="article:modified_time" content="2023-12-03T15:06:11.708Z">
+<meta property="article:modified_time" content="2024-04-02T10:20:23.689Z">
 <meta property="article:author" content="是小康呀.">
 <meta property="article:tag" content="JAVA">
 <meta name="twitter:card" content="summary">
@@ -493,7 +493,7 @@
 
         
         <div align="center" class="post-count">
-          字数：51.8k字 | 预计阅读时长：235分钟
+          字数：52.6k字 | 预计阅读时长：239分钟
       </div>
       </header>
     
@@ -2517,6 +2517,93 @@
 <h4 id="代码实现-49"><a href="#代码实现-49" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@DeleteMapping(&quot;/&#123;id&#125;&quot;)</span></span><br><span class="line"><span class="meta">@ApiOperation(value = &quot;删除友链&quot;, notes = &quot;删除友链&quot;)</span></span><br><span class="line"><span class="keyword">public</span> ResponseResult <span class="title function_">delete</span><span class="params">(<span class="meta">@PathVariable</span> Long id)</span>&#123;</span><br><span class="line">    linkService.removeById(id);</span><br><span class="line">    <span class="keyword">return</span> ResponseResult.okResult();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h1 id="Leetcode"><a href="#Leetcode" class="headerlink" title="Leetcode"></a>Leetcode</h1><h2 id="2024-4-2"><a href="#2024-4-2" class="headerlink" title="2024/4/2"></a>2024/4/2</h2><h3 id="404-左叶子之和"><a href="#404-左叶子之和" class="headerlink" title="404. 左叶子之和"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/sum-of-left-leaves/">404. 左叶子之和</a></h3><p>前序遍历，首先判断是不是左叶子（左节点不为null，左节点的左孩和右孩子为null）。然后进行递归遍历左右孩子，最后返回sum</p>
+<figure class="highlight java"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * public class TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode left;</span></span><br><span class="line"><span class="comment"> *     TreeNode right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int val) &#123; this.val = val; &#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int val, TreeNode left, TreeNode right) &#123;</span></span><br><span class="line"><span class="comment"> *         this.val = val;</span></span><br><span class="line"><span class="comment"> *         this.left = left;</span></span><br><span class="line"><span class="comment"> *         this.right = right;</span></span><br><span class="line"><span class="comment"> *     &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>; <span class="comment">//全局变量</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">sumOfLeftLeaves</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="literal">null</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//如果是左叶子节点</span></span><br><span class="line">        <span class="keyword">if</span>(root.left!=<span class="literal">null</span> &amp;&amp; root.left.left==<span class="literal">null</span> &amp;&amp; root.left.right==<span class="literal">null</span>) &#123;</span><br><span class="line">        sum+=root.left.val;</span><br><span class="line">        &#125;</span><br><span class="line">        sumOfLeftLeaves(root.left);</span><br><span class="line">        sumOfLeftLeaves(root.right);</span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="513-找树左下角的值"><a href="#513-找树左下角的值" class="headerlink" title="513. 找树左下角的值"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-bottom-left-tree-value/">513. 找树左下角的值</a></h3><p>BFS 广度优先搜索。从右往左对每一层进行遍历，最后一层的最后一个节点就是左下角的值</p>
+<p><strong>代码</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">findBottomLeftValue</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">        <span class="comment">//层序遍历 从右向左进行遍历，最后一个就是最底层最左边的值</span></span><br><span class="line">        Deque&lt;TreeNode&gt; queue = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">if</span>(root==<span class="literal">null</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//将root放入队列</span></span><br><span class="line">        queue.offerLast(root);</span><br><span class="line">        <span class="type">int</span> <span class="variable">res</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(!queue.isEmpty()) &#123;</span><br><span class="line">            <span class="type">TreeNode</span> <span class="variable">node</span> <span class="operator">=</span> queue.pollFirst();</span><br><span class="line">            <span class="comment">//最后那个值就是要返回的</span></span><br><span class="line">            res = node.val;</span><br><span class="line">            <span class="comment">//先将右节点放入</span></span><br><span class="line">            <span class="keyword">if</span>(node.right!=<span class="literal">null</span>)</span><br><span class="line">            queue.addLast(node.right);</span><br><span class="line">            <span class="comment">//在放左节点</span></span><br><span class="line">            <span class="keyword">if</span>(node.left!=<span class="literal">null</span>)</span><br><span class="line">            queue.addLast(node.left);</span><br><span class="line">            &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="617-合并二叉树"><a href="#617-合并二叉树" class="headerlink" title="617. 合并二叉树"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/merge-two-binary-trees/">617. 合并二叉树</a></h3><p>让root1作为合并后的树，然后让root2上的值加到root1</p>
+<p>深度优先遍历</p>
+<p>结束条件：root1==null 直接返回root2   相反 root2==null 直接返回root1</p>
+<p>过程：roo1+=root2，然后遍历左子树和右子树</p>
+<p><strong>代码</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> TreeNode <span class="title function_">mergeTrees</span><span class="params">(TreeNode root1, TreeNode root2)</span> &#123;</span><br><span class="line">        <span class="comment">//root1为null了那直接就可以返回root2</span></span><br><span class="line">        <span class="keyword">if</span>(root1==<span class="literal">null</span>) <span class="keyword">return</span> root2;  </span><br><span class="line">        <span class="keyword">if</span>(root2==<span class="literal">null</span>) <span class="keyword">return</span> root1;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//可以把root1作为和的点</span></span><br><span class="line">        root1.val = root1.val+root2.val;</span><br><span class="line">        root1.left = mergeTrees(root1.left,root2.left);</span><br><span class="line">        root1.right = mergeTrees(root1.right,root2.right);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> root1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="112-路径总和"><a href="#112-路径总和" class="headerlink" title="112. 路径总和"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/path-sum/">112. 路径总和</a></h3><p>思路：DFS遍历 </p>
+<p>递归终止条件：左右节点为null，计数器等于targetSum（或者每次用targetSum都减节点数最后为0 ）返回true ，返回false 左右节点都为null</p>
+<p>单层递归逻辑</p>
+<p>遍历左子树 count+val 如果到最后一个节点 然后执行 count-val回退到上一个根节点 </p>
+<p>右子树一样</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">hasPathSum</span><span class="params">(TreeNode root, <span class="type">int</span> targetSum)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(root==<span class="literal">null</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="comment">//只有一个根节点。需要判断一下减去根节点是否等于目标值</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        targetSum = targetSum - root.val;</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">flag</span> <span class="operator">=</span> dfs(root,targetSum);</span><br><span class="line">        <span class="keyword">return</span> flag;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">boolean</span> <span class="title function_">dfs</span><span class="params">(TreeNode root, <span class="type">int</span> count)</span> &#123;</span><br><span class="line">        <span class="comment">//终止条件</span></span><br><span class="line">        <span class="keyword">if</span>(root.left==<span class="literal">null</span> &amp;&amp; root.right ==<span class="literal">null</span> &amp;&amp; count==<span class="number">0</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">if</span>(root.left==<span class="literal">null</span> &amp;&amp; root.right == <span class="literal">null</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span>(root.left!=<span class="literal">null</span>) &#123;</span><br><span class="line">            count = count-root.left.val;</span><br><span class="line">            <span class="keyword">if</span>(dfs(root.left,count)) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            <span class="comment">//到这一节点的左节点为叶子时 回溯就相当于count没变，继续去找右孩子</span></span><br><span class="line">            count = count + root.left.val;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(root.right!=<span class="literal">null</span>) &#123;</span><br><span class="line">            count = count - root.right.val;</span><br><span class="line">            <span class="keyword">if</span>(dfs(root.right,count)) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            <span class="comment">//到这一节点的左节点为叶子时 回溯就相当于count没变，继续去找右孩子</span></span><br><span class="line">            count = count + root.right.val;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,ALTER,INDEX on *.* TO &#x27;root&#x27;@&#x27;8.130.97.224&#x27; IDENTIFIED BY 123456;</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           
         
 
@@ -4538,6 +4625,93 @@
 <h4 id="代码实现-49"><a href="#代码实现-49" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@DeleteMapping(&quot;/&#123;id&#125;&quot;)</span></span><br><span class="line"><span class="meta">@ApiOperation(value = &quot;删除友链&quot;, notes = &quot;删除友链&quot;)</span></span><br><span class="line"><span class="keyword">public</span> ResponseResult <span class="title function_">delete</span><span class="params">(<span class="meta">@PathVariable</span> Long id)</span>&#123;</span><br><span class="line">    linkService.removeById(id);</span><br><span class="line">    <span class="keyword">return</span> ResponseResult.okResult();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h1 id="Leetcode"><a href="#Leetcode" class="headerlink" title="Leetcode"></a>Leetcode</h1><h2 id="2024-4-2"><a href="#2024-4-2" class="headerlink" title="2024/4/2"></a>2024/4/2</h2><h3 id="404-左叶子之和"><a href="#404-左叶子之和" class="headerlink" title="404. 左叶子之和"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/sum-of-left-leaves/">404. 左叶子之和</a></h3><p>前序遍历，首先判断是不是左叶子（左节点不为null，左节点的左孩和右孩子为null）。然后进行递归遍历左右孩子，最后返回sum</p>
+<figure class="highlight java"><figcaption><span>[]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * public class TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode left;</span></span><br><span class="line"><span class="comment"> *     TreeNode right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int val) &#123; this.val = val; &#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int val, TreeNode left, TreeNode right) &#123;</span></span><br><span class="line"><span class="comment"> *         this.val = val;</span></span><br><span class="line"><span class="comment"> *         this.left = left;</span></span><br><span class="line"><span class="comment"> *         this.right = right;</span></span><br><span class="line"><span class="comment"> *     &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>; <span class="comment">//全局变量</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">sumOfLeftLeaves</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="literal">null</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//如果是左叶子节点</span></span><br><span class="line">        <span class="keyword">if</span>(root.left!=<span class="literal">null</span> &amp;&amp; root.left.left==<span class="literal">null</span> &amp;&amp; root.left.right==<span class="literal">null</span>) &#123;</span><br><span class="line">        sum+=root.left.val;</span><br><span class="line">        &#125;</span><br><span class="line">        sumOfLeftLeaves(root.left);</span><br><span class="line">        sumOfLeftLeaves(root.right);</span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="513-找树左下角的值"><a href="#513-找树左下角的值" class="headerlink" title="513. 找树左下角的值"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-bottom-left-tree-value/">513. 找树左下角的值</a></h3><p>BFS 广度优先搜索。从右往左对每一层进行遍历，最后一层的最后一个节点就是左下角的值</p>
+<p><strong>代码</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">findBottomLeftValue</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">        <span class="comment">//层序遍历 从右向左进行遍历，最后一个就是最底层最左边的值</span></span><br><span class="line">        Deque&lt;TreeNode&gt; queue = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">if</span>(root==<span class="literal">null</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//将root放入队列</span></span><br><span class="line">        queue.offerLast(root);</span><br><span class="line">        <span class="type">int</span> <span class="variable">res</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(!queue.isEmpty()) &#123;</span><br><span class="line">            <span class="type">TreeNode</span> <span class="variable">node</span> <span class="operator">=</span> queue.pollFirst();</span><br><span class="line">            <span class="comment">//最后那个值就是要返回的</span></span><br><span class="line">            res = node.val;</span><br><span class="line">            <span class="comment">//先将右节点放入</span></span><br><span class="line">            <span class="keyword">if</span>(node.right!=<span class="literal">null</span>)</span><br><span class="line">            queue.addLast(node.right);</span><br><span class="line">            <span class="comment">//在放左节点</span></span><br><span class="line">            <span class="keyword">if</span>(node.left!=<span class="literal">null</span>)</span><br><span class="line">            queue.addLast(node.left);</span><br><span class="line">            &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="617-合并二叉树"><a href="#617-合并二叉树" class="headerlink" title="617. 合并二叉树"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/merge-two-binary-trees/">617. 合并二叉树</a></h3><p>让root1作为合并后的树，然后让root2上的值加到root1</p>
+<p>深度优先遍历</p>
+<p>结束条件：root1==null 直接返回root2   相反 root2==null 直接返回root1</p>
+<p>过程：roo1+=root2，然后遍历左子树和右子树</p>
+<p><strong>代码</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> TreeNode <span class="title function_">mergeTrees</span><span class="params">(TreeNode root1, TreeNode root2)</span> &#123;</span><br><span class="line">        <span class="comment">//root1为null了那直接就可以返回root2</span></span><br><span class="line">        <span class="keyword">if</span>(root1==<span class="literal">null</span>) <span class="keyword">return</span> root2;  </span><br><span class="line">        <span class="keyword">if</span>(root2==<span class="literal">null</span>) <span class="keyword">return</span> root1;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//可以把root1作为和的点</span></span><br><span class="line">        root1.val = root1.val+root2.val;</span><br><span class="line">        root1.left = mergeTrees(root1.left,root2.left);</span><br><span class="line">        root1.right = mergeTrees(root1.right,root2.right);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> root1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="112-路径总和"><a href="#112-路径总和" class="headerlink" title="112. 路径总和"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/path-sum/">112. 路径总和</a></h3><p>思路：DFS遍历 </p>
+<p>递归终止条件：左右节点为null，计数器等于targetSum（或者每次用targetSum都减节点数最后为0 ）返回true ，返回false 左右节点都为null</p>
+<p>单层递归逻辑</p>
+<p>遍历左子树 count+val 如果到最后一个节点 然后执行 count-val回退到上一个根节点 </p>
+<p>右子树一样</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">hasPathSum</span><span class="params">(TreeNode root, <span class="type">int</span> targetSum)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(root==<span class="literal">null</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="comment">//只有一个根节点。需要判断一下减去根节点是否等于目标值</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        targetSum = targetSum - root.val;</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">flag</span> <span class="operator">=</span> dfs(root,targetSum);</span><br><span class="line">        <span class="keyword">return</span> flag;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">boolean</span> <span class="title function_">dfs</span><span class="params">(TreeNode root, <span class="type">int</span> count)</span> &#123;</span><br><span class="line">        <span class="comment">//终止条件</span></span><br><span class="line">        <span class="keyword">if</span>(root.left==<span class="literal">null</span> &amp;&amp; root.right ==<span class="literal">null</span> &amp;&amp; count==<span class="number">0</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">if</span>(root.left==<span class="literal">null</span> &amp;&amp; root.right == <span class="literal">null</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span>(root.left!=<span class="literal">null</span>) &#123;</span><br><span class="line">            count = count-root.left.val;</span><br><span class="line">            <span class="keyword">if</span>(dfs(root.left,count)) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            <span class="comment">//到这一节点的左节点为叶子时 回溯就相当于count没变，继续去找右孩子</span></span><br><span class="line">            count = count + root.left.val;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(root.right!=<span class="literal">null</span>) &#123;</span><br><span class="line">            count = count - root.right.val;</span><br><span class="line">            <span class="keyword">if</span>(dfs(root.right,count)) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            <span class="comment">//到这一节点的左节点为叶子时 回溯就相当于count没变，继续去找右孩子</span></span><br><span class="line">            count = count + root.right.val;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,ALTER,INDEX on *.* TO &#x27;root&#x27;@&#x27;8.130.97.224&#x27; IDENTIFIED BY 123456;</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       
 
       
@@ -4743,7 +4917,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2023 是小康呀.
+    		&copy; 2024 是小康呀.
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
